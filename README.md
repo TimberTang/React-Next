@@ -10,3 +10,17 @@ React-Next
 ### 手动配置
 ### 自动配置: åcreate-next-app
 
+### Router.events.on('')
+routeChangeStart
+routeChangeComplete
+beforeHistoryChange
+routeChangeError
+hashChangeStart
+hashChangeComplete
+
+
+###  Lazy Loading  模块:moment  组件:
+
+## 模块 可以使用const moment = await import('moment')
+## 组件 import dymic from 'next/dymic'
+## const one = dymic import ('/')

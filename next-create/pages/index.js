@@ -1,65 +1,76 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from "react";
+import Link from "next/link";
+import Router from "next/router";
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const Home = () => {
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+// routeChangeStart
+// routeChangeComplete
+// beforeHistoryChange
+// routeChangeError
+// hashChangeStart
+// hashChangeComplete
+    Router.events.on('routeChangeStart', () => {
+        console.log('1, routeChangeStart-> 路由变化参数为');
+    })
+    Router.events.on('routeChangeComplete', () => {
+        console.log('2, routeChangeComplete-> 路由变化结束');
+    })
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+    Router.events.on('beforeHistoryChange', () => {
+        console.log('3, beforeHistoryChange-> 路由发生之前');
+    })
+    Router.events.on('routeChangeError', () => {
+        console.log('4, routeChangeError-> 路由发生错误');
+    })
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+    Router.events.on('hashChangeStart', () => {
+        console.log('5, hashChangeStart-> hash变化之前');
+    })
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+    Router.events.on('hashChangeComplete', () => {
+        console.log('6, hashChangeComplete-> hash变化之后');
+    })
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+    
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+    function gotoXiaojiejie() {
+        Router.push({
+            pathname: "/xiaojiejie",
+            query: {
+                name: "结衣来啦",
+            },
+        });
+    }
+    return (
+        <>
+            <div>我是首页</div>
+            <div>
+                <Link
+                    href={{ pathname: "/xiaojiejie", query: { name: "结衣" } }}
+                >
+                    <a>结衣</a>
+                </Link>
+                <br></br>
+                <Link href="/xiaojiejie?name=度多">
+                    <a>多多</a>
+                </Link>
+                <div>
+                    <button onClick={gotoXiaojiejie}>选择结衣</button>
+                </div>
+                {/* <div>
+                    <Link href='/#timbertang'>timber</Link>
+                </div> */}
+                <Link href='/timber'>timber</Link>
+            </div>
+            {/* <Link href='/TimberA'>去TimberA页面</Link>
+      <br/>
+      <Link href='/TimberB'><a>去TimberB页面</a></Link> */}
+            {/* <div>
+        <button onClick={gotoA}>TimberA</button>
+      </div> */}
+        </>
+    );
+};
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
-}
+export default Home;
